@@ -9,3 +9,7 @@ This project demonstrates a rule-based decision system with:
 
 ### 🔗 Live Demo
 https://yamunahbdev.github.io/eligibility-system/
+
+## 📸 Demo
+
+![Eligibility System](screenshot.png)
