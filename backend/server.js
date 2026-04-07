@@ -10,11 +10,17 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Root route (for Render health check)
+app.get('/', (req, res) => {
+  res.send('API is running');
+});
+
 // API endpoint
 app.post('/api/eligibility', (req, res) => {
+  console.log("Request received:", req.body);
+
   const { age, status } = req.body;
 
-  // ✅ Validation
   if (age === undefined || status === undefined) {
     return res.status(400).json({
       success: false,
@@ -22,15 +28,6 @@ app.post('/api/eligibility', (req, res) => {
     });
   }
 
-  // Additional validation (professional touch)
-  if (age < 0) {
-    return res.status(400).json({
-      success: false,
-      error: 'Age must be a positive number'
-    });
-  }
-
-  // ✅ Rule logic (IA-style)
   let eligible = false;
   let message = "Not eligible";
 
@@ -39,7 +36,8 @@ app.post('/api/eligibility', (req, res) => {
     message = "Eligible for support";
   }
 
-  // ✅ Structured response (industry standard)
+  console.log("Sending response:", { eligible, message });
+
   res.json({
     success: true,
     data: {
