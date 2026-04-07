@@ -1,12 +1,28 @@
-function checkEligibility() {
+async function checkEligibility() {
   const age = document.getElementById('age').value;
   const status = document.getElementById('status').value;
 
-  let result = "Not eligible";
+  const resultElement = document.getElementById('result');
+  resultElement.innerText = "Checking...";
 
-  if (age >= 18 && status === "unemployed") {
-    result = "Eligible for support";
+  try {
+    const response = await fetch('http://localhost:3000/api/eligibility', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ age: Number(age), status })
+    });
+
+    const data = await response.json();
+
+    if (data.error) {
+      resultElement.innerText = data.error;
+    } else {
+      resultElement.innerText = data.message;
+    }
+
+  } catch (error) {
+    resultElement.innerText = "Server error";
   }
-
-  document.getElementById('result').innerText = result;
 }
