@@ -12,14 +12,23 @@ app.use(express.json());
 app.post('/api/eligibility', (req, res) => {
   const { age, status } = req.body;
 
-  // Validation
-  if (!age || !status) {
+  // ✅ Validation
+  if (age === undefined || status === undefined) {
     return res.status(400).json({
+      success: false,
       error: 'Age and status are required'
     });
   }
 
-  // Rule logic (IA-style)
+  // Additional validation (professional touch)
+  if (age < 0) {
+    return res.status(400).json({
+      success: false,
+      error: 'Age must be a positive number'
+    });
+  }
+
+  // ✅ Rule logic (IA-style)
   let eligible = false;
   let message = "Not eligible";
 
@@ -28,9 +37,13 @@ app.post('/api/eligibility', (req, res) => {
     message = "Eligible for support";
   }
 
+  // ✅ Structured response (industry standard)
   res.json({
-    eligible,
-    message
+    success: true,
+    data: {
+      eligible,
+      message
+    }
   });
 });
 

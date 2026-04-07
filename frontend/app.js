@@ -16,11 +16,11 @@ async function checkEligibility() {
 
     const data = await response.json();
 
-    if (data.error) {
-      resultElement.innerText = data.error;
-    } else {
-      resultElement.innerText = data.message;
-    }
+   if (!data.success) {
+  resultElement.innerText = data.error;
+} else {
+  resultElement.innerText = data.data.message;
+}
 
   } catch (error) {
     resultElement.innerText = "Server error";
