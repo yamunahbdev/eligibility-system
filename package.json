@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "start": "node backend/server.js"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yamunahbdev/eligibility-system.git"
@@ -16,9 +17,10 @@
     "url": "https://github.com/yamunahbdev/eligibility-system/issues"
   },
   "homepage": "https://github.com/yamunahbdev/eligibility-system#readme",
-  "description": "",
+  "description": "This project demonstrates a rule-based decision system with:",
   "dependencies": {
     "cors": "^2.8.6",
     "express": "^5.2.1"
-  }
+  },
+  "devDependencies": {}
 }
