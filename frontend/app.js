@@ -14,15 +14,19 @@ async function checkEligibility() {
       body: JSON.stringify({ age: Number(age), status })
     });
 
+    if (!response.ok) {
+      throw new Error("API error");
+    }
+
     const data = await response.json();
 
-   if (!data.success) {
-  resultElement.innerText = data.error;
-} else {
-  resultElement.innerText = data.data.message;
-}
+    if (!data.success) {
+      resultElement.innerText = data.error;
+    } else {
+      resultElement.innerText = data.data.message;
+    }
 
   } catch (error) {
-    resultElement.innerText = "Server error";
+    resultElement.innerText = "Server is starting, please try again in a few seconds...";
   }
 }
