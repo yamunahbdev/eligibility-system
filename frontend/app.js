@@ -6,7 +6,7 @@ async function checkEligibility() {
   resultElement.innerText = "Checking...";
 
   try {
-    const response = await fetch('http://localhost:3000/api/eligibility', {
+    const response = await fetch('https://eligibility-api.onrender.com/api/eligibility', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
